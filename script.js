@@ -865,10 +865,12 @@ window.showDetail = function(type) {
     html += '</div>';
     body.innerHTML = html;
     modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
 };
 
 window.closeModal = function() {
     document.getElementById('detailModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 };
 
 window.showDiary = function() {
@@ -921,10 +923,12 @@ window.showDiary = function() {
     
     body.innerHTML = html;
     modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
 };
 
 window.closeDiary = function() {
     document.getElementById('diaryModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 };
 
 // ========== 初始化 ==========

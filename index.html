@@ -65,6 +65,16 @@
             max-width: min(720px, 90%);
         }
 
+        @media (max-width: 600px) {
+            .day-counter {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                padding: 12px 16px;
+                border-radius: 32px;
+            }
+        }
+
         .day-counter span {
             font-weight: bold;
             font-size: 1.8rem;
@@ -365,9 +375,35 @@
             max-width: 500px;
             width: 90%;
             max-height: 70vh;
-            overflow-y: auto;
+            overflow: hidden; /* 由内层滚动，外层负责裁剪圆角 */
             box-shadow: 0 30px 40px rgba(0, 30, 0, 0.3);
             border: 3px solid #8bb56a;
+        }
+
+        .modal-body {
+            max-height: calc(70vh - 80px);
+            overflow-y: auto;
+            padding-right: 8px;
+            border-radius: 24px;
+        }
+
+        /* 美化并“藏”在圆角里的滚动条 */
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(140, 181, 106, 0.7);
+            border-radius: 999px;
+        }
+
+        .modal-body {
+            scrollbar-width: auto;
+            scrollbar-color: rgba(113, 147, 86, 0.7) transparent;
         }
 
         .diary-modal {
@@ -480,6 +516,10 @@
             font-size: 12px;
             z-index: 2000;
             max-width: 300px;
+        }
+        /* 弹窗打开时禁用页面滚动 */
+        body.modal-open {
+            overflow: hidden;
         }
     </style>
 </head>
