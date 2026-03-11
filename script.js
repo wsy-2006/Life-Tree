@@ -225,10 +225,12 @@ function showShareModal(shareCode, content) {
     
     contentDisplay.innerHTML = html;
     modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
 }
 
 window.closeShareModal = function() {
     document.getElementById('shareModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 };
 
 window.copyShareCode = function() {
@@ -968,6 +970,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (canvas) {
         canvas.onclick = window.showDiary;
     }
+
+    // 分享语文本框自动根据内容增高（在弹窗创建后挂载）
     
     function animate() {
         if (animating.root || animating.trunk || animating.branch || animating.growth) {
@@ -1033,27 +1037,37 @@ function addShareModal() {
                 <button class="close-btn" onclick="closeShareModal()">✕</button>
             </div>
             <div class="modal-body">
-                <div id="shareContentDisplay" style="margin-bottom:20px;"></div>
+                <div id="shareContentDisplay" style="margin-bottom:16px;"></div>
+                <p style="color:#5b7a5b; font-size:0.9rem; margin-bottom:16px;">✨ 将分享码发给朋友，他们可以导入你的养树日记</p>
                 
-                <div style="margin:20px 0;">
+                <div style="margin:16px 0;">
                     <label style="font-weight:bold; color:#2d5a2d;">分享码：</label>
                     <div style="display:flex; gap:10px; margin-top:5px;">
                         <input id="shareCodeDisplay" type="text" readonly style="flex:1; padding:10px; border:2px solid #b8d4a0; border-radius:30px; background:#f5fae8; font-family:monospace;">
-                        <button onclick="copyShareCode()" style="padding:10px 20px; border:none; border-radius:30px; background:#3c763c; color:white; cursor:pointer;">复制</button>
+                        <button onclick="copyShareCode()" style="padding:10px 20px; border:none; border-radius:30px; background:#3c763c; color:white; cursor:pointer; white-space:nowrap;">复制</button>
                     </div>
                 </div>
                 
-                <div style="margin:20px 0;">
-                    <label style="font-weight:bold; color:#2d5a2d;">留言：</label>
-                    <textarea id="shareMessage" placeholder="写一句分享语..." style="width:100%; padding:10px; border:2px solid #b8d4a0; border-radius:20px; margin-top:5px;" rows="2"></textarea>
+                <div style="margin:12px 0 4px 0;">
+                    <label style="font-weight:bold; color:#2d5a2d; display:block; margin-bottom:4px;">留言：</label>
+                    <textarea id="shareMessage" placeholder="写一句分享语..." style="width:100%; padding:8px 12px; border:2px solid #b8d4a0; border-radius:20px; resize:none; overflow:hidden; line-height:1.4; min-height:2.2em; box-sizing:border-box;" rows="1"></textarea>
                 </div>
-                
-                <p style="color:#5b7a5b; font-size:0.9rem;">✨ 将分享码发给朋友，他们可以导入你的养树日记</p>
             </div>
         </div>
     `;
     
     document.body.appendChild(modal);
+
+    // 分享语文本框自动根据内容增高
+    const shareMessage = document.getElementById('shareMessage');
+    if (shareMessage) {
+        const autoResize = (el) => {
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        };
+        autoResize(shareMessage);
+        shareMessage.addEventListener('input', () => autoResize(shareMessage));
+    }
     
     // 添加导入弹窗
     const importModal = document.createElement('div');
@@ -1081,8 +1095,10 @@ function addShareModal() {
 
 window.showImportModal = function() {
     document.getElementById('importModal').style.display = 'flex';
+    document.body.classList.add('modal-open');
 };
 
 window.closeImportModal = function() {
     document.getElementById('importModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 };
