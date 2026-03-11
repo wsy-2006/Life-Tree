@@ -980,10 +980,10 @@ function addUserSwitchButtons() {
     if (!container) return;
     
     const userDiv = document.createElement('div');
-    userDiv.style.marginTop = '10px';
     userDiv.style.display = 'flex';
     userDiv.style.gap = '10px';
-    userDiv.style.justifyContent = 'center';
+    userDiv.style.alignItems = 'center';
+    userDiv.style.marginLeft = 'auto';
     
     userDiv.innerHTML = `
         <button class="user-btn" data-user="user1" onclick="switchUser('user1')" style="padding:8px 20px; border:none; border-radius:30px; background:#3c763c; color:white; cursor:pointer; font-weight:bold;">🌱 园丁一</button>

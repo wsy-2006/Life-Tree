@@ -50,16 +50,19 @@
         }
 
         .day-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: clamp(1.2rem, 1.1rem + 0.6vw, 1.6rem);
             color: #2d5a2d;
-            background: rgba(220, 240, 200, 0.8);
-            padding: 8px 25px;
-            border-radius: 40px;
-            display: inline-block;
-            margin: 0 auto 25px;
+            background: rgba(220, 240, 200, 0.9);
+            padding: 10px 32px;
+            border-radius: 999px;
+            margin: 10px auto 28px;
             border: 2px solid #8bb56a;
-            box-shadow: 0 4px 0 #5d8c4d;
+            box-shadow: 0 5px 0 #5d8c4d;
+            max-width: min(720px, 90%);
         }
 
         .day-counter span {
@@ -82,8 +85,6 @@
             border-radius: 32px;
             padding: 25px;
             box-shadow: inset 0 1px 4px rgba(255,255,255,0.8), 0 8px 12px rgba(0,20,0,0.1);
-            max-height: 650px;
-            overflow-y: auto;
         }
 
         .section-header {
@@ -178,10 +179,12 @@
             display: flex;
             gap: 6px;
             margin-top: 8px;
+            flex-wrap: wrap;
         }
 
         .add-entry input {
-            flex: 2;
+            flex: 1 1 160px;
+            min-width: 0;
             padding: 10px 15px;
             border: 2px solid #b8d4a0;
             border-radius: 40px;
